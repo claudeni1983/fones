@@ -1,0 +1,36 @@
+{
+  "xsappname": "listfones",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.ListFonesViewer",
+      "description": "ListFonesViewer"
+    },
+    {
+      "name": "$XSAPPNAME.ListFonesManager",
+      "description": "ListFonesManager"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "ListFonesViewer",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.ListFonesViewer"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "ListFonesManager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.ListFonesManager"
+      ],
+      "attribute-references": []
+    }
+  ],
+  "oauth2-configuration": {
+    "token-validity": 3600
+  }
+}
