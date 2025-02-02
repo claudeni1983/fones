@@ -1,6 +1,6 @@
 _schema-version: 3.3.0
 ID: fones
-version: 1.0.0
+version: 1.0.1
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
@@ -38,6 +38,27 @@ modules:
     requires:
       - name: fones-db
 
+  - name: fones
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: fones-auth
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+
 resources:
   - name: fones-auth
     type: org.cloudfoundry.managed-service
@@ -48,7 +69,7 @@ resources:
       config:
         xsappname: fones-${org}-${space}
         tenant-mode: dedicated
-      services-keys: 
+      services-keys:
         - name: fones-uaa-key
   - name: fones-db
     type: com.sap.xs.hdi-container

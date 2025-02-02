@@ -13,6 +13,8 @@ service CatalogService @(path: '/srv') {
         }
     ]) as projection on my.listFones;
 */
-    entity listfones as projection on my.listFones;    
+    entity listfones as projection on my.listFones;
+
+    entity contatos as projection on my.contatos;    
 
 }
